@@ -19,6 +19,12 @@ or
 pip install PyQt5
 ```
 
+### Run the application
+
+```bash
+py app.py
+```
+
 ## Contributors
 
 - [@Thiago-Heleno](https://github.com/Thiago-Heleno) - Frontend
