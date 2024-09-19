@@ -5,7 +5,7 @@
 ### Prerequisites
 
 - Python 3.x
-- PyQt5
+- Packages inside requirements.txt
 
 You can install the required dependencies using `pip`:
 
@@ -13,16 +13,24 @@ You can install the required dependencies using `pip`:
 pip install -r requirements.txt
 ```
 
-or
-
-```bash
-pip install PyQt5
-```
-
 ### Run the application
 
 ```bash
 py app.py
+```
+
+### Build de EXE using Pyinstaller:
+
+windows:
+
+```
+pyinstaller --name MyAppName --icon assets/icons/icon.ico --onefile --windowed --add-data "assets;assets" app.py
+```
+
+linux/mac:
+
+```
+pyinstaller --name MyAppName --icon assets/icons/icon.ico --onefile --windowed --add-data "assets:assets" app.py
 ```
 
 ## Contributors

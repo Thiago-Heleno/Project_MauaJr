@@ -1,9 +1,11 @@
-import sys
+import sys, os
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QStackedWidget, QLabel
 )
 from PyQt5.QtGui import QFont, QPixmap, QIcon
 from PyQt5.QtCore import Qt
+
+from components.file_upload import FileUploadWidget
 
 class SearchPage(QWidget):
     def __init__(self, stacked_widget):
@@ -23,6 +25,9 @@ class SearchPage(QWidget):
         
         # Add add new client btn
         self.layout.addLayout(self.add_new_client())
+        
+        # Add add upload file input
+        self.layout.addWidget(FileUploadWidget())
         
         # Create a persistent result label
         self.result_label = QLabel()
@@ -68,6 +73,7 @@ class SearchPage(QWidget):
         new_client_layout.addStretch(1)
         
         return new_client_layout
+    
         
     def create_search_bar(self):
         search_layout = QHBoxLayout()
@@ -88,7 +94,11 @@ class SearchPage(QWidget):
         """)
         
         # Add the magnifier icon inside the input field
-        search_input.addAction(QIcon('assets/icons/magnifier.png'), QLineEdit.TrailingPosition)
+        assets_dir = "assets/icons/magnifier.png"
+        if getattr(sys, 'frozen', False):  # If the app is bundled as an executable
+            assets_dir = os.path.join(sys._MEIPASS, "assets/icons/magnifier.png")
+            
+        search_input.addAction(QIcon(assets_dir), QLineEdit.TrailingPosition)
         
         # Connect signals for Enter key and text changes
         search_input.returnPressed.connect(self.on_enter_pressed)  # When Enter is pressed
