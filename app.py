@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt
 
 from screens.create import CreatePage
 from screens.search import SearchPage
+from screens.new_client import NewClientPage
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -25,10 +26,12 @@ class MainWindow(QWidget):
         # Create instances of the pages
         self.main_page = SearchPage(self.stacked_widget)
         self.create_page = CreatePage(self.stacked_widget)
+        self.new_client_page = NewClientPage(self.stacked_widget)
 
         # Add pages to the QStackedWidget
         self.stacked_widget.addWidget(self.main_page)
         self.stacked_widget.addWidget(self.create_page)
+        self.stacked_widget.addWidget(self.new_client_page)
 
         # Add the stacked widget to the main layout
         self.layout.addWidget(self.stacked_widget)
@@ -44,10 +47,9 @@ class MainWindow(QWidget):
 
           # Create and add navigation buttons
           home_button = QPushButton("Home")
-          create_button = QPushButton("Create")
           
           # Set button style
-          buttons = [home_button, create_button]
+          buttons = [home_button]
           for button in buttons:
               button.setFont(QFont('Arial', 14))
               button.setStyleSheet(
@@ -57,10 +59,8 @@ class MainWindow(QWidget):
 
           # Connect buttons to page switching
           home_button.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
-          create_button.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
 
           nav_layout.addWidget(home_button)
-          nav_layout.addWidget(create_button)
 
           # Add a spacer to push buttons to the left
           nav_layout.addStretch(1)
